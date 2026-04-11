@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
@@ -21,12 +22,14 @@ export default function App() {
 
   return (
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-        <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
-        {renderPage()}
-      </div>
+      <CartProvider>
+        <Toaster />
+        <Sonner />
+        <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
+          <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
+          {renderPage()}
+        </div>
+      </CartProvider>
     </TooltipProvider>
   );
 }

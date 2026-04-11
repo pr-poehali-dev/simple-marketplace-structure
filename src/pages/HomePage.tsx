@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { allProducts, type Product } from '@/data/products';
 import ProductModal from '@/components/ProductModal';
+import { useCart } from '@/context/CartContext';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -27,6 +28,7 @@ const featured = allProducts.filter(p => ['Хит', 'Новинка', '-20%'].in
 
 export default function HomePage({ onNavigate }: HomePageProps) {
   const [selected, setSelected] = useState<Product | null>(null);
+  const { add } = useCart();
 
   return (
     <div className="min-h-screen dark-bg font-body">
@@ -194,12 +196,22 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         </div>
                       )}
                     </div>
-                    <button
-                      className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
-                      style={{ letterSpacing: '0.08em' }}
-                      onClick={e => { e.stopPropagation(); setSelected(product); }}>
-                      <span>Подробнее</span>
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={e => { e.stopPropagation(); add(product); }}
+                        className="btn-blood p-2 text-xs font-body font-semibold"
+                        title="В корзину">
+                        <span><Icon name="ShoppingBag" size={14} /></span>
+                      </button>
+                      <button
+                        className="px-4 py-2 text-xs font-body font-semibold uppercase rounded transition-all"
+                        style={{ border: '1px solid rgba(139,0,0,0.4)', color: '#c0392b', letterSpacing: '0.08em', background: 'transparent' }}
+                        onClick={e => { e.stopPropagation(); setSelected(product); }}
+                        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(139,0,0,0.1)')}
+                        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                        Открыть
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

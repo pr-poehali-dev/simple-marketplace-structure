@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import Icon from '@/components/ui/icon';
 import { allProducts, type Product } from '@/data/products';
 import ProductModal from '@/components/ProductModal';
+import { useCart } from '@/context/CartContext';
 
 const categories = ['Все', 'Кольца', 'Ожерелья', 'Серьги', 'Браслеты', 'Броши', 'Декор'];
 const sortOptions = [
@@ -20,6 +21,7 @@ export default function CatalogPage() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [view, setView]               = useState<'grid' | 'list'>('grid');
   const [selected, setSelected]       = useState<Product | null>(null);
+  const { add } = useCart();
 
   const filtered = useMemo(() => {
     let r = [...allProducts];
@@ -214,12 +216,24 @@ export default function CatalogPage() {
                         </span>
                       )}
                     </div>
-                    <button
-                      onClick={e => { e.stopPropagation(); setSelected(p); }}
-                      className="btn-blood px-3 py-1.5 text-xs font-body font-semibold uppercase"
-                      style={{ letterSpacing: '0.06em' }}>
-                      <span>Подробнее</span>
-                    </button>
+                    <div className="flex gap-1.5">
+                      <button
+                        onClick={e => { e.stopPropagation(); if (p.inStock) add(p); }}
+                        disabled={!p.inStock}
+                        className="btn-blood p-1.5 text-xs font-body font-semibold"
+                        style={{ opacity: p.inStock ? 1 : 0.4 }}
+                        title="В корзину">
+                        <span><Icon name="ShoppingBag" size={13} /></span>
+                      </button>
+                      <button
+                        onClick={e => { e.stopPropagation(); setSelected(p); }}
+                        className="px-3 py-1.5 text-xs font-body font-semibold uppercase rounded transition-all"
+                        style={{ border: '1px solid rgba(139,0,0,0.4)', color: '#c0392b', letterSpacing: '0.06em', background: 'transparent' }}
+                        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(139,0,0,0.1)')}
+                        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                        Открыть
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -251,12 +265,23 @@ export default function CatalogPage() {
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <span className="font-serif text-lg font-semibold" style={{ color: '#e8e0d0' }}>{p.price.toLocaleString()} ₽</span>
-                    <button
-                      onClick={e => { e.stopPropagation(); setSelected(p); }}
-                      className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
-                      style={{ letterSpacing: '0.06em' }}>
-                      <span>Подробнее</span>
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={e => { e.stopPropagation(); if (p.inStock) add(p); }}
+                        disabled={!p.inStock}
+                        className="btn-blood px-3 py-2 text-xs font-body font-semibold"
+                        style={{ opacity: p.inStock ? 1 : 0.4 }}>
+                        <span><Icon name="ShoppingBag" size={13} /></span>
+                      </button>
+                      <button
+                        onClick={e => { e.stopPropagation(); setSelected(p); }}
+                        className="px-3 py-2 text-xs font-body font-semibold uppercase rounded transition-all"
+                        style={{ border: '1px solid rgba(139,0,0,0.4)', color: '#c0392b', letterSpacing: '0.06em', background: 'transparent' }}
+                        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(139,0,0,0.1)')}
+                        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                        Открыть
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
