@@ -2,48 +2,24 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 
 const contacts = [
-  {
-    icon: 'Phone',
-    label: 'Телефон',
-    value: '+7 (800) 555-35-35',
-    sub: 'Бесплатно по России',
-    color: '#f72585',
-  },
-  {
-    icon: 'Mail',
-    label: 'Email',
-    value: 'hello@market.ru',
-    sub: 'Ответим в течение часа',
-    color: '#4361ee',
-  },
-  {
-    icon: 'MapPin',
-    label: 'Адрес',
-    value: 'Москва, ул. Тверская, 1',
-    sub: 'Офис и пункт выдачи',
-    color: '#4cc9f0',
-  },
-  {
-    icon: 'Clock',
-    label: 'Режим работы',
-    value: 'Пн–Пт: 9:00–20:00',
-    sub: 'Сб–Вс: 10:00–18:00',
-    color: '#ffbe0b',
-  },
+  { icon: 'Phone',   label: 'Телефон',       value: '+7 (800) 666-13-13',  sub: 'Бесплатно, 10:00–22:00', color: '#c0392b' },
+  { icon: 'Mail',    label: 'Email',          value: 'dark@darkware.ru',    sub: 'Ответим в течение дня',  color: '#888' },
+  { icon: 'MapPin',  label: 'Адрес',          value: 'Москва, Арбат, 13',   sub: 'Шоурум и самовывоз',     color: '#c0392b' },
+  { icon: 'Clock',   label: 'Режим работы',   value: 'Пн–Пт: 11:00–21:00', sub: 'Сб–Вс: 12:00–20:00',    color: '#888' },
 ];
 
 const socials = [
-  { icon: '✈️', label: 'Telegram', handle: '@market_official' },
-  { icon: '📷', label: 'Instagram', handle: '@market.ru' },
-  { icon: '🎵', label: 'TikTok', handle: '@market_ru' },
-  { icon: '💬', label: 'ВКонтакте', handle: 'vk.com/market' },
+  { icon: '✈️', label: 'Telegram',    handle: '@darkware_official' },
+  { icon: '📷', label: 'Instagram',   handle: '@darkware.ru' },
+  { icon: '💬', label: 'ВКонтакте',   handle: 'vk.com/darkware' },
+  { icon: '▶️', label: 'YouTube',     handle: 'Darkware channel' },
 ];
 
 const faq = [
-  { q: 'Как оформить заказ?', a: 'Добавьте товар в корзину и следуйте инструкциям при оформлении. Доставка занимает 1–3 рабочих дня.' },
-  { q: 'Можно ли вернуть товар?', a: 'Да, в течение 30 дней после покупки без объяснения причин. Возврат денег в течение 3–5 рабочих дней.' },
-  { q: 'Есть ли гарантия на товары?', a: 'На все товары распространяется гарантия производителя. На электронику — от 1 года.' },
-  { q: 'Как стать продавцом?', a: 'Заполните форму на сайте или напишите нам на email. Подключение занимает 1–2 рабочих дня.' },
+  { q: 'Из чего сделаны украшения?',   a: 'Серебро 925°, чернёное серебро, латунь с покрытием. Натуральные камни: обсидиан, гранат, оникс, лабрадор.' },
+  { q: 'Есть ли уход за изделиями?',   a: 'Да. К каждому украшению прилагается инструкция по уходу. Избегайте контакта с водой и химией.' },
+  { q: 'Возможен ли индивидуальный заказ?', a: 'Да, принимаем заказы на изготовление по эскизу. Срок — от 2 недель. Пишите на email.' },
+  { q: 'Какая гарантия на товары?',    a: 'Гарантия 1 год на все украшения. Бесплатный ремонт при производственном браке.' },
 ];
 
 export default function ContactsPage() {
@@ -57,125 +33,107 @@ export default function ContactsPage() {
   };
 
   return (
-    <div className="min-h-screen mesh-bg font-golos pt-20">
+    <div className="min-h-screen dark-bg font-body pt-20">
       <div className="max-w-7xl mx-auto px-4 py-12">
 
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-sm font-medium mb-2" style={{ color: '#f72585' }}>Мы всегда на связи</p>
-          <h1 className="text-4xl lg:text-5xl font-display font-black text-white mb-4">
-            <span className="gradient-text">Контакты</span>
-          </h1>
-          <p className="text-white/50 text-lg max-w-lg mx-auto">
-            Есть вопросы? Напишите нам или позвоните — поможем разобраться
+          <p className="text-xs uppercase tracking-widest mb-3 font-body ornament"
+            style={{ color: '#c0392b', letterSpacing: '0.2em' }}>связь с тьмой</p>
+          <h1 className="font-gothic text-5xl lg:text-6xl mb-4" style={{ color: '#e8e0d0' }}>Контакты</h1>
+          <p className="font-serif italic text-xl" style={{ color: 'rgba(235,235,235,0.4)' }}>
+            "Мы всегда в тени — но всегда рядом"
           </p>
         </div>
 
         {/* Contact cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {contacts.map((c) => (
-            <div key={c.label} className="p-5 rounded-2xl text-center card-hover"
-              style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <div className="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center"
-                style={{ background: `${c.color}20`, border: `1px solid ${c.color}30` }}>
-                <Icon name={c.icon} fallback="CircleAlert" size={20} style={{ color: c.color }} />
+          {contacts.map(c => (
+            <div key={c.label} className="card-dark p-5 rounded-xl text-center">
+              <div className="w-11 h-11 rounded-xl mx-auto mb-4 flex items-center justify-center"
+                style={{ background: 'rgba(139,0,0,0.12)', border: '1px solid rgba(139,0,0,0.25)' }}>
+                <Icon name={c.icon} fallback="CircleAlert" size={18} style={{ color: c.color }} />
               </div>
-              <p className="text-white/40 text-xs mb-1">{c.label}</p>
-              <p className="text-white font-semibold text-sm mb-0.5">{c.value}</p>
-              <p className="text-white/30 text-xs">{c.sub}</p>
+              <p className="text-xs uppercase tracking-widest mb-1 font-body"
+                style={{ color: 'rgba(235,235,235,0.3)', letterSpacing: '0.12em' }}>{c.label}</p>
+              <p className="font-serif font-semibold text-sm mb-0.5" style={{ color: '#e8e0d0' }}>{c.value}</p>
+              <p className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.3)' }}>{c.sub}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid lg:grid-cols-2 gap-10 mb-16">
+
           {/* Form */}
-          <div className="p-8 rounded-3xl"
-            style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <h2 className="text-2xl font-display font-bold text-white mb-2">Написать нам</h2>
-            <p className="text-white/40 text-sm mb-6">Ответим в течение нескольких часов</p>
+          <div className="card-dark p-8 rounded-2xl">
+            <h2 className="font-gothic text-3xl mb-1" style={{ color: '#e8e0d0' }}>Написать нам</h2>
+            <p className="font-serif italic mb-7" style={{ color: 'rgba(235,235,235,0.35)', fontSize: '0.95rem' }}>
+              Ответим в течение нескольких часов
+            </p>
 
             {sent ? (
-              <div className="text-center py-12">
-                <div className="text-5xl mb-4">🚀</div>
-                <h3 className="text-xl font-bold text-white mb-2">Сообщение отправлено!</h3>
-                <p className="text-white/50 text-sm mb-6">Скоро свяжемся с вами</p>
-                <button
-                  onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }}
-                  className="btn-gradient px-6 py-2.5 rounded-xl text-sm font-semibold text-white"
-                >
-                  <span>Написать ещё</span>
+              <div className="text-center py-14">
+                <div className="text-5xl mb-4">🩸</div>
+                <h3 className="font-gothic text-3xl mb-2" style={{ color: '#e8e0d0' }}>Послание принято!</h3>
+                <p className="font-serif italic text-sm mb-7" style={{ color: 'rgba(235,235,235,0.4)' }}>
+                  Тьма услышала вас
+                </p>
+                <button onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }}
+                  className="btn-outline-blood px-7 py-2.5 text-xs font-body uppercase"
+                  style={{ letterSpacing: '0.12em' }}>
+                  Написать ещё
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {[
+                  { key: 'name',    label: 'Ваше имя',    placeholder: 'Имя ночного странника', type: 'text' },
+                  { key: 'email',   label: 'Email',        placeholder: 'dark@example.ru',        type: 'email' },
+                ].map(f => (
+                  <div key={f.key}>
+                    <label className="text-xs uppercase tracking-widest mb-1.5 block font-body"
+                      style={{ color: 'rgba(235,235,235,0.35)', letterSpacing: '0.14em' }}>{f.label}</label>
+                    <input type={f.type} required placeholder={f.placeholder}
+                      value={form[f.key as 'name' | 'email']}
+                      onChange={e => setForm({ ...form, [f.key]: e.target.value })}
+                      className="w-full px-4 py-3 rounded text-sm outline-none font-body transition-all"
+                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#ebebeb' }} />
+                  </div>
+                ))}
                 <div>
-                  <label className="text-white/50 text-xs font-medium mb-1.5 block">Ваше имя</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Иван Иванов"
-                    className="w-full px-4 py-3 rounded-xl text-white placeholder-white/25 outline-none transition-all text-sm"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                    }}
-                  />
+                  <label className="text-xs uppercase tracking-widest mb-1.5 block font-body"
+                    style={{ color: 'rgba(235,235,235,0.35)', letterSpacing: '0.14em' }}>Сообщение</label>
+                  <textarea required rows={5} placeholder="Ваш вопрос или пожелание..."
+                    value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded text-sm outline-none resize-none font-body transition-all"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#ebebeb' }} />
                 </div>
-                <div>
-                  <label className="text-white/50 text-xs font-medium mb-1.5 block">Email</label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="ivan@mail.ru"
-                    className="w-full px-4 py-3 rounded-xl text-white placeholder-white/25 outline-none transition-all text-sm"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                    }}
-                  />
-                </div>
-                <div>
-                  <label className="text-white/50 text-xs font-medium mb-1.5 block">Сообщение</label>
-                  <textarea
-                    required
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Ваш вопрос или предложение..."
-                    rows={5}
-                    className="w-full px-4 py-3 rounded-xl text-white placeholder-white/25 outline-none transition-all resize-none text-sm"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                    }}
-                  />
-                </div>
-                <button type="submit" className="w-full btn-gradient py-3.5 rounded-xl font-semibold text-white text-sm">
+                <button type="submit" className="w-full btn-blood py-3.5 text-xs font-body font-semibold uppercase blood-glow-sm"
+                  style={{ letterSpacing: '0.14em' }}>
                   <span className="flex items-center justify-center gap-2">
-                    <Icon name="Send" size={16} /> Отправить сообщение
+                    <Icon name="Send" size={14} /> Отправить послание
                   </span>
                 </button>
               </form>
             )}
           </div>
 
-          {/* FAQ + Socials */}
-          <div className="space-y-6">
+          {/* FAQ + socials */}
+          <div className="flex flex-col gap-6">
             {/* Socials */}
-            <div className="p-6 rounded-3xl"
-              style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <h3 className="font-display font-bold text-white mb-4">Мы в соцсетях</h3>
+            <div className="card-dark p-6 rounded-2xl">
+              <h3 className="font-gothic text-2xl mb-5" style={{ color: '#e8e0d0' }}>Мы в сети</h3>
               <div className="grid grid-cols-2 gap-3">
-                {socials.map((s) => (
-                  <div key={s.label} className="flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all hover:bg-white/5"
-                    style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+                {socials.map(s => (
+                  <div key={s.label}
+                    className="flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all"
+                    style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.02)' }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(139,0,0,0.35)')}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)')}>
                     <span className="text-xl">{s.icon}</span>
                     <div>
-                      <p className="text-white text-sm font-medium">{s.label}</p>
-                      <p className="text-white/35 text-xs">{s.handle}</p>
+                      <p className="text-sm font-body font-medium" style={{ color: '#e8e0d0' }}>{s.label}</p>
+                      <p className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.3)' }}>{s.handle}</p>
                     </div>
                   </div>
                 ))}
@@ -183,26 +141,25 @@ export default function ContactsPage() {
             </div>
 
             {/* FAQ */}
-            <div className="p-6 rounded-3xl"
-              style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <h3 className="font-display font-bold text-white mb-4">Частые вопросы</h3>
+            <div className="card-dark p-6 rounded-2xl">
+              <h3 className="font-gothic text-2xl mb-5" style={{ color: '#e8e0d0' }}>Вопросы и ответы</h3>
               <div className="space-y-2">
                 {faq.map((item, i) => (
-                  <div key={i} className="rounded-xl overflow-hidden"
-                    style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <button
-                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  <div key={i} className="rounded-lg overflow-hidden"
+                    style={{ border: `1px solid ${openFaq === i ? 'rgba(139,0,0,0.35)' : 'rgba(255,255,255,0.05)'}` }}>
+                    <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       className="w-full flex items-center justify-between px-4 py-3 text-left transition-all"
-                      style={{ background: openFaq === i ? 'rgba(247,37,133,0.08)' : 'transparent' }}
-                    >
-                      <span className="text-white text-sm font-medium">{item.q}</span>
-                      <Icon name={openFaq === i ? 'ChevronUp' : 'ChevronDown'} size={16}
+                      style={{ background: openFaq === i ? 'rgba(139,0,0,0.08)' : 'transparent' }}>
+                      <span className="font-body text-sm font-medium" style={{ color: '#e8e0d0' }}>{item.q}</span>
+                      <Icon name={openFaq === i ? 'ChevronUp' : 'ChevronDown'} size={15}
                         className="flex-shrink-0 ml-2"
-                        style={{ color: openFaq === i ? '#f72585' : 'rgba(255,255,255,0.3)' }} />
+                        style={{ color: openFaq === i ? '#c0392b' : 'rgba(235,235,235,0.25)' }} />
                     </button>
                     {openFaq === i && (
-                      <div className="px-4 pb-3 animate-fade-up">
-                        <p className="text-white/50 text-sm leading-relaxed">{item.a}</p>
+                      <div className="px-4 pb-4 animate-fade-in">
+                        <p className="font-body text-xs leading-relaxed" style={{ color: 'rgba(235,235,235,0.45)', lineHeight: '1.7' }}>
+                          {item.a}
+                        </p>
                       </div>
                     )}
                   </div>

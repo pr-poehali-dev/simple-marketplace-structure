@@ -2,288 +2,245 @@ import { useState, useMemo } from 'react';
 import Icon from '@/components/ui/icon';
 
 const allProducts = [
-  { id: 1, name: 'Беспроводные наушники Pro X', price: 12990, category: 'Электроника', rating: 4.8, reviews: 234, badge: 'Хит', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/0f4f33ac-a118-4378-8818-50dedf208024.jpg' },
-  { id: 2, name: 'Смарт-часы Fusion X2', price: 24990, category: 'Электроника', rating: 4.9, reviews: 412, badge: 'Новинка', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/0f4f33ac-a118-4378-8818-50dedf208024.jpg' },
-  { id: 3, name: 'Ноутбук Ultra Slim', price: 89990, category: 'Электроника', rating: 4.7, reviews: 98, badge: '', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c7589a27-11a6-4ca3-b33f-6c5bbd583ab5.jpg' },
-  { id: 4, name: 'Кроссовки Urban Edge', price: 8490, category: 'Одежда', rating: 4.6, reviews: 189, badge: '-30%', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/fc58728b-ad71-4909-9dda-6e174caedda6.jpg' },
-  { id: 5, name: 'Куртка Street Style', price: 6990, category: 'Одежда', rating: 4.4, reviews: 67, badge: '', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/fc58728b-ad71-4909-9dda-6e174caedda6.jpg' },
-  { id: 6, name: 'Сумка Premium leather', price: 4590, category: 'Одежда', rating: 4.5, reviews: 143, badge: 'Скидка', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/fc58728b-ad71-4909-9dda-6e174caedda6.jpg' },
-  { id: 7, name: 'Подушка Memory Foam', price: 3490, category: 'Для дома', rating: 4.3, reviews: 201, badge: '', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c7589a27-11a6-4ca3-b33f-6c5bbd583ab5.jpg' },
-  { id: 8, name: 'Кофемашина Barista Pro', price: 18990, category: 'Для дома', rating: 4.8, reviews: 324, badge: 'Хит', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c7589a27-11a6-4ca3-b33f-6c5bbd583ab5.jpg' },
-  { id: 9, name: 'Гантели Premium Set', price: 5990, category: 'Спорт', rating: 4.7, reviews: 88, badge: '', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c7589a27-11a6-4ca3-b33f-6c5bbd583ab5.jpg' },
-  { id: 10, name: 'Крем SPF 50+', price: 1290, category: 'Красота', rating: 4.5, reviews: 567, badge: 'Топ', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/fc58728b-ad71-4909-9dda-6e174caedda6.jpg' },
-  { id: 11, name: 'Геймпад Pro Controller', price: 7490, category: 'Игры', rating: 4.9, reviews: 301, badge: 'Новинка', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/0f4f33ac-a118-4378-8818-50dedf208024.jpg' },
-  { id: 12, name: 'Планшет Tab S Ultra', price: 54990, category: 'Электроника', rating: 4.8, reviews: 156, badge: '', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/0f4f33ac-a118-4378-8818-50dedf208024.jpg' },
+  { id: 1,  name: 'Кольцо "Череп Барона"',       price: 4290,  category: 'Кольца',    rating: 4.9, reviews: 87,  badge: 'Хит',     material: 'Серебро 925',         image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg' },
+  { id: 2,  name: 'Кольцо "Тёмный Рыцарь"',       price: 5890,  category: 'Кольца',    rating: 4.8, reviews: 53,  badge: 'Новинка', material: 'Чернёное серебро',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg' },
+  { id: 3,  name: 'Кольцо "Обсидиановый змей"',   price: 3490,  category: 'Кольца',    rating: 4.6, reviews: 38,  badge: '',        material: 'Серебро + обсидиан', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg' },
+  { id: 4,  name: 'Колье "Кровавая Луна"',         price: 6890,  category: 'Ожерелья',  rating: 4.8, reviews: 64,  badge: 'Новинка', material: 'Чёрное золото',       image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
+  { id: 5,  name: 'Колье "Пентакль ночи"',         price: 4290,  category: 'Ожерелья',  rating: 4.7, reviews: 92,  badge: 'Хит',     material: 'Серебро 925',         image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
+  { id: 6,  name: 'Колье "Вечная тьма"',           price: 8490,  category: 'Ожерелья',  rating: 5.0, reviews: 29,  badge: 'Люкс',    material: 'Серебро + гранат',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
+  { id: 7,  name: 'Серьги "Вороново крыло"',       price: 3490,  category: 'Серьги',    rating: 4.7, reviews: 41,  badge: '-20%',    material: 'Оксид. серебро',      image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
+  { id: 8,  name: 'Серьги "Кровавая роза"',        price: 2890,  category: 'Серьги',    rating: 4.5, reviews: 67,  badge: '',        material: 'Серебро + рубин',     image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
+  { id: 9,  name: 'Браслет "Цепи тьмы"',           price: 4890,  category: 'Браслеты',  rating: 4.8, reviews: 44,  badge: 'Хит',     material: 'Чернёное серебро',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
+  { id: 10, name: 'Браслет "Шипы вампира"',        price: 3290,  category: 'Браслеты',  rating: 4.6, reviews: 31,  badge: '',        material: 'Серебро + кожа',      image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
+  { id: 11, name: 'Брошь "Летучая мышь"',          price: 1990,  category: 'Броши',     rating: 4.7, reviews: 58,  badge: '-15%',    material: 'Чернёное серебро',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
+  { id: 12, name: 'Свеча "Чёрная месса"',          price: 890,   category: 'Декор',     rating: 4.9, reviews: 123, badge: 'Топ',     material: 'Парафин + аромат',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
 ];
 
-const categories = ['Все', 'Электроника', 'Одежда', 'Для дома', 'Спорт', 'Красота', 'Игры'];
+const categories = ['Все', 'Кольца', 'Ожерелья', 'Серьги', 'Браслеты', 'Броши', 'Декор'];
 const sortOptions = [
-  { value: 'popular', label: 'По популярности' },
-  { value: 'price-asc', label: 'Сначала дешевле' },
+  { value: 'popular',    label: 'По популярности' },
+  { value: 'price-asc',  label: 'Сначала дешевле' },
   { value: 'price-desc', label: 'Сначала дороже' },
-  { value: 'rating', label: 'По рейтингу' },
+  { value: 'rating',     label: 'По рейтингу' },
 ];
-
-const badgeColors: Record<string, string> = {
-  'Хит': '#f72585',
-  'Новинка': '#4cc9f0',
-  '-30%': '#4361ee',
-  'Скидка': '#fb5607',
-  'Топ': '#ffbe0b',
-};
 
 export default function CatalogPage() {
-  const [selectedCategory, setSelectedCategory] = useState('Все');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('popular');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
+  const [category, setCategory] = useState('Все');
+  const [search, setSearch]     = useState('');
+  const [sort, setSort]         = useState('popular');
+  const [maxPrice, setMaxPrice] = useState(10000);
   const [minRating, setMinRating] = useState(0);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [view, setView]         = useState<'grid' | 'list'>('grid');
 
   const filtered = useMemo(() => {
-    let result = [...allProducts];
-
-    if (selectedCategory !== 'Все') {
-      result = result.filter(p => p.category === selectedCategory);
+    let r = [...allProducts];
+    if (category !== 'Все') r = r.filter(p => p.category === category);
+    if (search.trim()) r = r.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+    r = r.filter(p => p.price <= maxPrice);
+    if (minRating > 0) r = r.filter(p => p.rating >= minRating);
+    switch (sort) {
+      case 'price-asc':  r.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': r.sort((a, b) => b.price - a.price); break;
+      case 'rating':     r.sort((a, b) => b.rating - a.rating); break;
+      default:           r.sort((a, b) => b.reviews - a.reviews);
     }
-    if (searchQuery.trim()) {
-      result = result.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
-    }
-    result = result.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
-    if (minRating > 0) {
-      result = result.filter(p => p.rating >= minRating);
-    }
-
-    switch (sortBy) {
-      case 'price-asc': result.sort((a, b) => a.price - b.price); break;
-      case 'price-desc': result.sort((a, b) => b.price - a.price); break;
-      case 'rating': result.sort((a, b) => b.rating - a.rating); break;
-      default: result.sort((a, b) => b.reviews - a.reviews);
-    }
-
-    return result;
-  }, [selectedCategory, searchQuery, sortBy, priceRange, minRating]);
+    return r;
+  }, [category, search, sort, maxPrice, minRating]);
 
   return (
-    <div className="min-h-screen mesh-bg font-golos pt-20">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen dark-bg font-body pt-20">
+      <div className="max-w-7xl mx-auto px-4 py-10">
 
         {/* Header */}
-        <div className="mb-8">
-          <p className="text-sm font-medium mb-1" style={{ color: '#f72585' }}>Каталог</p>
-          <h1 className="text-3xl lg:text-4xl font-display font-black text-white mb-2">
-            Все <span className="gradient-text">товары</span>
-          </h1>
-          <p className="text-white/40">{filtered.length} товаров найдено</p>
+        <div className="mb-10">
+          <p className="text-xs uppercase tracking-widest mb-2 ornament font-body"
+            style={{ color: '#c0392b', letterSpacing: '0.2em' }}>каталог</p>
+          <h1 className="font-gothic text-4xl lg:text-5xl mb-1" style={{ color: '#e8e0d0' }}>Украшения</h1>
+          <p className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.3)' }}>{filtered.length} товаров найдено</p>
         </div>
 
         {/* Search + controls */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="flex flex-col md:flex-row gap-3 mb-5">
           <div className="flex-1 relative">
-            <Icon name="Search" size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
-            <input
-              type="text"
+            <Icon name="Search" size={16} className="absolute left-4 top-1/2 -translate-y-1/2"
+              style={{ color: 'rgba(235,235,235,0.25)' }} />
+            <input type="text" value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Поиск по названию..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 rounded-2xl text-white placeholder-white/30 outline-none transition-all"
-              style={{
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}
-            />
-            {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white">
-                <Icon name="X" size={16} />
+              className="w-full pl-10 pr-4 py-3 rounded text-sm outline-none font-body"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#ebebeb' }} />
+            {search && (
+              <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2"
+                style={{ color: 'rgba(255,255,255,0.3)' }}>
+                <Icon name="X" size={14} />
               </button>
             )}
           </div>
 
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="px-4 py-3 rounded-2xl text-white outline-none cursor-pointer text-sm"
-            style={{
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.08)',
-            }}
-          >
+          <select value={sort} onChange={e => setSort(e.target.value)}
+            className="px-4 py-3 rounded text-xs outline-none cursor-pointer font-body uppercase"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(235,235,235,0.6)', letterSpacing: '0.08em' }}>
             {sortOptions.map(o => (
-              <option key={o.value} value={o.value} style={{ background: '#111127' }}>{o.label}</option>
+              <option key={o.value} value={o.value} style={{ background: '#141414' }}>{o.label}</option>
             ))}
           </select>
 
           <div className="flex gap-2">
-            <button
-              onClick={() => setFiltersOpen(!filtersOpen)}
-              className="flex items-center gap-2 px-4 py-3 rounded-2xl text-sm font-medium transition-all"
+            <button onClick={() => setFiltersOpen(!filtersOpen)}
+              className="flex items-center gap-2 px-4 py-3 rounded text-xs font-body uppercase transition-all"
               style={{
-                background: filtersOpen ? 'rgba(247,37,133,0.15)' : 'rgba(255,255,255,0.06)',
-                border: `1px solid ${filtersOpen ? 'rgba(247,37,133,0.3)' : 'rgba(255,255,255,0.08)'}`,
-                color: filtersOpen ? '#f72585' : 'rgba(255,255,255,0.7)'
-              }}
-            >
-              <Icon name="SlidersHorizontal" size={16} />
-              Фильтры
+                background: filtersOpen ? 'rgba(139,0,0,0.15)' : 'rgba(255,255,255,0.04)',
+                border: `1px solid ${filtersOpen ? 'rgba(139,0,0,0.45)' : 'rgba(255,255,255,0.08)'}`,
+                color: filtersOpen ? '#c0392b' : 'rgba(235,235,235,0.5)',
+                letterSpacing: '0.1em',
+              }}>
+              <Icon name="SlidersHorizontal" size={14} /> Фильтры
             </button>
-            <button onClick={() => setViewMode('grid')} className="p-3 rounded-2xl transition-all"
-              style={{ background: viewMode === 'grid' ? 'rgba(247,37,133,0.15)' : 'rgba(255,255,255,0.06)', border: `1px solid ${viewMode === 'grid' ? 'rgba(247,37,133,0.3)' : 'rgba(255,255,255,0.08)'}`, color: viewMode === 'grid' ? '#f72585' : 'rgba(255,255,255,0.5)' }}>
-              <Icon name="LayoutGrid" size={16} />
-            </button>
-            <button onClick={() => setViewMode('list')} className="p-3 rounded-2xl transition-all"
-              style={{ background: viewMode === 'list' ? 'rgba(247,37,133,0.15)' : 'rgba(255,255,255,0.06)', border: `1px solid ${viewMode === 'list' ? 'rgba(247,37,133,0.3)' : 'rgba(255,255,255,0.08)'}`, color: viewMode === 'list' ? '#f72585' : 'rgba(255,255,255,0.5)' }}>
-              <Icon name="List" size={16} />
-            </button>
+            {(['grid', 'list'] as const).map(v => (
+              <button key={v} onClick={() => setView(v)}
+                className="p-3 rounded transition-all"
+                style={{
+                  background: view === v ? 'rgba(139,0,0,0.15)' : 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${view === v ? 'rgba(139,0,0,0.45)' : 'rgba(255,255,255,0.08)'}`,
+                  color: view === v ? '#c0392b' : 'rgba(235,235,235,0.4)',
+                }}>
+                <Icon name={v === 'grid' ? 'LayoutGrid' : 'List'} size={14} />
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Filters panel */}
+        {/* Filters */}
         {filtersOpen && (
-          <div className="mb-6 p-6 rounded-2xl animate-fade-up"
-            style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="mb-6 p-6 rounded-xl animate-fade-up"
+            style={{ background: '#141414', border: '1px solid rgba(139,0,0,0.25)' }}>
+            <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <label className="text-white/60 text-sm font-medium mb-3 block">Диапазон цен</label>
-                <div className="flex items-center gap-4 mb-3">
-                  <span className="text-white font-semibold text-sm">{priceRange[0].toLocaleString()} ₽</span>
-                  <span className="text-white/30 text-xs">—</span>
-                  <span className="text-white font-semibold text-sm">{priceRange[1].toLocaleString()} ₽</span>
-                </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={100000}
-                  step={1000}
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                  className="w-full"
-                />
+                <label className="text-xs uppercase tracking-widest font-body mb-3 block"
+                  style={{ color: 'rgba(235,235,235,0.4)', letterSpacing: '0.15em' }}>
+                  Макс. цена: <span style={{ color: '#c0392b' }}>{maxPrice.toLocaleString()} ₽</span>
+                </label>
+                <input type="range" min={500} max={10000} step={100} value={maxPrice}
+                  onChange={e => setMaxPrice(Number(e.target.value))} className="w-full" />
               </div>
               <div>
-                <label className="text-white/60 text-sm font-medium mb-3 block">Минимальный рейтинг</label>
+                <label className="text-xs uppercase tracking-widest font-body mb-3 block"
+                  style={{ color: 'rgba(235,235,235,0.4)', letterSpacing: '0.15em' }}>Минимальный рейтинг</label>
                 <div className="flex gap-2">
-                  {[0, 3, 4, 4.5].map((r) => (
-                    <button
-                      key={r}
-                      onClick={() => setMinRating(r)}
-                      className="flex items-center gap-1 px-3 py-2 rounded-xl text-sm transition-all"
+                  {[0, 4, 4.5, 5].map(r => (
+                    <button key={r} onClick={() => setMinRating(r)}
+                      className="px-3 py-2 rounded text-xs font-body uppercase transition-all"
                       style={{
-                        background: minRating === r ? 'rgba(255,190,11,0.2)' : 'rgba(255,255,255,0.06)',
-                        border: `1px solid ${minRating === r ? 'rgba(255,190,11,0.4)' : 'rgba(255,255,255,0.08)'}`,
-                        color: minRating === r ? '#ffbe0b' : 'rgba(255,255,255,0.5)'
-                      }}
-                    >
+                        background: minRating === r ? 'rgba(139,0,0,0.2)' : 'rgba(255,255,255,0.04)',
+                        border: `1px solid ${minRating === r ? 'rgba(139,0,0,0.5)' : 'rgba(255,255,255,0.08)'}`,
+                        color: minRating === r ? '#c0392b' : 'rgba(235,235,235,0.45)',
+                        letterSpacing: '0.08em',
+                      }}>
                       {r === 0 ? 'Любой' : `★ ${r}+`}
                     </button>
                   ))}
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => { setSelectedCategory('Все'); setSearchQuery(''); setPriceRange([0, 100000]); setMinRating(0); }}
-              className="mt-4 text-sm text-white/40 hover:text-white/70 transition-colors flex items-center gap-1"
-            >
-              <Icon name="RotateCcw" size={13} /> Сбросить фильтры
+            <button onClick={() => { setCategory('Все'); setSearch(''); setMaxPrice(10000); setMinRating(0); }}
+              className="mt-5 text-xs font-body uppercase tracking-widest flex items-center gap-1.5 transition-colors"
+              style={{ color: 'rgba(235,235,235,0.3)', letterSpacing: '0.12em' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#c0392b')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(235,235,235,0.3)')}>
+              <Icon name="RotateCcw" size={12} /> Сбросить фильтры
             </button>
           </div>
         )}
 
         {/* Category tabs */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-8">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex-shrink-0"
+          {categories.map(cat => (
+            <button key={cat} onClick={() => setCategory(cat)}
+              className="whitespace-nowrap px-5 py-2 rounded text-xs font-body uppercase tracking-wider flex-shrink-0 transition-all"
               style={{
-                background: selectedCategory === cat
-                  ? 'linear-gradient(135deg, #f72585, #4361ee)'
-                  : 'rgba(255,255,255,0.06)',
-                color: selectedCategory === cat ? '#fff' : 'rgba(255,255,255,0.55)',
-                border: `1px solid ${selectedCategory === cat ? 'transparent' : 'rgba(255,255,255,0.08)'}`,
-              }}
-            >
+                background: category === cat ? '#8b0000' : 'rgba(255,255,255,0.04)',
+                color: category === cat ? '#fff' : 'rgba(235,235,235,0.45)',
+                border: `1px solid ${category === cat ? '#8b0000' : 'rgba(255,255,255,0.07)'}`,
+                letterSpacing: '0.12em',
+                boxShadow: category === cat ? '0 0 12px rgba(139,0,0,0.35)' : 'none',
+              }}>
               {cat}
             </button>
           ))}
         </div>
 
-        {/* Products grid */}
+        {/* Products */}
         {filtered.length === 0 ? (
-          <div className="text-center py-24">
-            <div className="text-5xl mb-4">🔍</div>
-            <p className="text-white/50 text-lg">Товары не найдены</p>
-            <p className="text-white/30 text-sm mt-2">Попробуйте изменить фильтры</p>
+          <div className="text-center py-28">
+            <div className="text-5xl mb-5">🕯️</div>
+            <p className="font-serif text-2xl" style={{ color: 'rgba(235,235,235,0.4)' }}>Тьма поглотила результаты...</p>
+            <p className="text-xs font-body uppercase tracking-widest mt-3" style={{ color: 'rgba(235,235,235,0.2)', letterSpacing: '0.15em' }}>Измените фильтры</p>
           </div>
-        ) : (
-          <div className={viewMode === 'grid'
-            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'
-            : 'flex flex-col gap-4'
-          }>
-            {filtered.map((product) => (
-              viewMode === 'grid' ? (
-                <div key={product.id} className="group rounded-2xl overflow-hidden card-hover"
-                  style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <div className="relative h-44 overflow-hidden">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(17,17,39,0.7), transparent 60%)' }} />
-                    {product.badge && (
-                      <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold text-white"
-                        style={{ background: badgeColors[product.badge] || '#f72585' }}>
-                        {product.badge}
-                      </span>
-                    )}
-                    <button className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{ background: 'rgba(7,7,15,0.7)' }}>
-                      <Icon name="Heart" size={13} className="text-white/70" />
+        ) : view === 'grid' ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {filtered.map(p => (
+              <div key={p.id} className="group card-dark rounded-xl overflow-hidden">
+                <div className="relative h-44 overflow-hidden">
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.8), transparent 55%)' }} />
+                  {p.badge && (
+                    <span className="absolute top-2 left-2 px-2 py-0.5 text-white text-xs font-body font-semibold uppercase"
+                      style={{ background: '#8b0000', letterSpacing: '0.06em' }}>{p.badge}</span>
+                  )}
+                  <button className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
+                    style={{ background: 'rgba(10,10,10,0.75)', border: '1px solid rgba(139,0,0,0.35)' }}>
+                    <Icon name="Heart" size={12} style={{ color: '#c0392b' }} />
+                  </button>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs font-body uppercase tracking-wider mb-1"
+                    style={{ color: 'rgba(192,192,192,0.35)', letterSpacing: '0.1em' }}>{p.material}</p>
+                  <h3 className="font-serif font-semibold text-sm mb-2 line-clamp-2" style={{ color: '#e8e0d0' }}>{p.name}</h3>
+                  <div className="flex items-center gap-1 mb-3">
+                    <span className="text-xs" style={{ color: '#8b0000' }}>{'★'.repeat(Math.floor(p.rating))}</span>
+                    <span className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.25)' }}>({p.reviews})</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-serif text-base font-semibold" style={{ color: '#e8e0d0' }}>{p.price.toLocaleString()} ₽</span>
+                    <button className="btn-blood px-3 py-1.5 text-xs font-body font-semibold uppercase"
+                      style={{ letterSpacing: '0.06em' }}>
+                      <span>+ Корзина</span>
                     </button>
                   </div>
-                  <div className="p-4">
-                    <p className="text-xs text-white/30 mb-1">{product.category}</p>
-                    <h3 className="text-sm font-semibold text-white mb-2 line-clamp-2">{product.name}</h3>
-                    <div className="flex items-center gap-1 mb-3 star-rating">
-                      <span className="text-xs">{'★'.repeat(Math.floor(product.rating))}</span>
-                      <span className="text-white/40 text-xs">({product.reviews})</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {filtered.map(p => (
+              <div key={p.id} className="group card-dark rounded-xl flex gap-4 p-4">
+                <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                  {p.badge && (
+                    <span className="absolute top-1 left-1 px-1.5 py-0.5 text-white font-body font-semibold uppercase"
+                      style={{ background: '#8b0000', fontSize: '9px', letterSpacing: '0.06em' }}>{p.badge}</span>
+                  )}
+                </div>
+                <div className="flex-1 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-body uppercase tracking-wider mb-0.5"
+                      style={{ color: 'rgba(192,192,192,0.35)', letterSpacing: '0.1em' }}>{p.material}</p>
+                    <h3 className="font-serif font-semibold text-base mb-1" style={{ color: '#e8e0d0' }}>{p.name}</h3>
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs" style={{ color: '#8b0000' }}>{'★'.repeat(Math.floor(p.rating))}</span>
+                      <span className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.25)' }}>({p.reviews})</span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-base font-bold text-white">{product.price.toLocaleString()} ₽</span>
-                      <button className="btn-gradient px-3 py-1.5 rounded-xl text-xs font-semibold text-white">
-                        <span>+ В корзину</span>
-                      </button>
-                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <span className="font-serif text-lg font-semibold" style={{ color: '#e8e0d0' }}>{p.price.toLocaleString()} ₽</span>
+                    <button className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
+                      style={{ letterSpacing: '0.06em' }}>
+                      <span>В корзину</span>
+                    </button>
                   </div>
                 </div>
-              ) : (
-                <div key={product.id} className="flex gap-4 p-4 rounded-2xl card-hover"
-                  style={{ background: 'rgba(17,17,39,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <div className="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                    {product.badge && (
-                      <span className="absolute top-1 left-1 px-1.5 py-0.5 rounded-full text-xs font-bold text-white"
-                        style={{ background: badgeColors[product.badge] || '#f72585', fontSize: '9px' }}>
-                        {product.badge}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex-1 flex items-center justify-between">
-                    <div>
-                      <p className="text-xs text-white/30 mb-0.5">{product.category}</p>
-                      <h3 className="text-sm font-semibold text-white mb-1">{product.name}</h3>
-                      <div className="flex items-center gap-1 star-rating">
-                        <span className="text-xs">{'★'.repeat(Math.floor(product.rating))}</span>
-                        <span className="text-white/40 text-xs">({product.reviews})</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end gap-2">
-                      <span className="text-base font-bold text-white">{product.price.toLocaleString()} ₽</span>
-                      <button className="btn-gradient px-4 py-2 rounded-xl text-xs font-semibold text-white">
-                        <span>В корзину</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )
+              </div>
             ))}
           </div>
         )}

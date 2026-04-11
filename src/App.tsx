@@ -12,10 +12,10 @@ export default function App() {
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'home': return <HomePage onNavigate={setCurrentPage} />;
-      case 'catalog': return <CatalogPage />;
+      case 'home':     return <HomePage onNavigate={setCurrentPage} />;
+      case 'catalog':  return <CatalogPage />;
       case 'contacts': return <ContactsPage />;
-      default: return <HomePage onNavigate={setCurrentPage} />;
+      default:         return <HomePage onNavigate={setCurrentPage} />;
     }
   };
 
@@ -23,7 +23,7 @@ export default function App() {
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <div style={{ minHeight: '100vh', background: '#07070f' }}>
+      <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
         <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
         {renderPage()}
       </div>
