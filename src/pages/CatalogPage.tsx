@@ -1,20 +1,7 @@
 import { useState, useMemo } from 'react';
 import Icon from '@/components/ui/icon';
-
-const allProducts = [
-  { id: 1,  name: 'Кольцо "Череп Барона"',       price: 4290,  category: 'Кольца',    rating: 4.9, reviews: 87,  badge: 'Хит',     material: 'Серебро 925',         image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg' },
-  { id: 2,  name: 'Кольцо "Тёмный Рыцарь"',       price: 5890,  category: 'Кольца',    rating: 4.8, reviews: 53,  badge: 'Новинка', material: 'Чернёное серебро',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg' },
-  { id: 3,  name: 'Кольцо "Обсидиановый змей"',   price: 3490,  category: 'Кольца',    rating: 4.6, reviews: 38,  badge: '',        material: 'Серебро + обсидиан', image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg' },
-  { id: 4,  name: 'Колье "Кровавая Луна"',         price: 6890,  category: 'Ожерелья',  rating: 4.8, reviews: 64,  badge: 'Новинка', material: 'Чёрное золото',       image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
-  { id: 5,  name: 'Колье "Пентакль ночи"',         price: 4290,  category: 'Ожерелья',  rating: 4.7, reviews: 92,  badge: 'Хит',     material: 'Серебро 925',         image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
-  { id: 6,  name: 'Колье "Вечная тьма"',           price: 8490,  category: 'Ожерелья',  rating: 5.0, reviews: 29,  badge: 'Люкс',    material: 'Серебро + гранат',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
-  { id: 7,  name: 'Серьги "Вороново крыло"',       price: 3490,  category: 'Серьги',    rating: 4.7, reviews: 41,  badge: '-20%',    material: 'Оксид. серебро',      image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
-  { id: 8,  name: 'Серьги "Кровавая роза"',        price: 2890,  category: 'Серьги',    rating: 4.5, reviews: 67,  badge: '',        material: 'Серебро + рубин',     image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg' },
-  { id: 9,  name: 'Браслет "Цепи тьмы"',           price: 4890,  category: 'Браслеты',  rating: 4.8, reviews: 44,  badge: 'Хит',     material: 'Чернёное серебро',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
-  { id: 10, name: 'Браслет "Шипы вампира"',        price: 3290,  category: 'Браслеты',  rating: 4.6, reviews: 31,  badge: '',        material: 'Серебро + кожа',      image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
-  { id: 11, name: 'Брошь "Летучая мышь"',          price: 1990,  category: 'Броши',     rating: 4.7, reviews: 58,  badge: '-15%',    material: 'Чернёное серебро',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
-  { id: 12, name: 'Свеча "Чёрная месса"',          price: 890,   category: 'Декор',     rating: 4.9, reviews: 123, badge: 'Топ',     material: 'Парафин + аромат',    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg' },
-];
+import { allProducts, type Product } from '@/data/products';
+import ProductModal from '@/components/ProductModal';
 
 const categories = ['Все', 'Кольца', 'Ожерелья', 'Серьги', 'Браслеты', 'Броши', 'Декор'];
 const sortOptions = [
@@ -25,13 +12,14 @@ const sortOptions = [
 ];
 
 export default function CatalogPage() {
-  const [category, setCategory] = useState('Все');
-  const [search, setSearch]     = useState('');
-  const [sort, setSort]         = useState('popular');
-  const [maxPrice, setMaxPrice] = useState(10000);
-  const [minRating, setMinRating] = useState(0);
+  const [category, setCategory]       = useState('Все');
+  const [search, setSearch]           = useState('');
+  const [sort, setSort]               = useState('popular');
+  const [maxPrice, setMaxPrice]       = useState(10000);
+  const [minRating, setMinRating]     = useState(0);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [view, setView]         = useState<'grid' | 'list'>('grid');
+  const [view, setView]               = useState<'grid' | 'list'>('grid');
+  const [selected, setSelected]       = useState<Product | null>(null);
 
   const filtered = useMemo(() => {
     let r = [...allProducts];
@@ -50,6 +38,8 @@ export default function CatalogPage() {
 
   return (
     <div className="min-h-screen dark-bg font-body pt-20">
+      {selected && <ProductModal product={selected} onClose={() => setSelected(null)} />}
+
       <div className="max-w-7xl mx-auto px-4 py-10">
 
         {/* Header */}
@@ -174,24 +164,39 @@ export default function CatalogPage() {
           <div className="text-center py-28">
             <div className="text-5xl mb-5">🕯️</div>
             <p className="font-serif text-2xl" style={{ color: 'rgba(235,235,235,0.4)' }}>Тьма поглотила результаты...</p>
-            <p className="text-xs font-body uppercase tracking-widest mt-3" style={{ color: 'rgba(235,235,235,0.2)', letterSpacing: '0.15em' }}>Измените фильтры</p>
+            <p className="text-xs font-body uppercase tracking-widest mt-3"
+              style={{ color: 'rgba(235,235,235,0.2)', letterSpacing: '0.15em' }}>Измените фильтры</p>
           </div>
         ) : view === 'grid' ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {filtered.map(p => (
-              <div key={p.id} className="group card-dark rounded-xl overflow-hidden">
-                <div className="relative h-44 overflow-hidden">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.8), transparent 55%)' }} />
+              <div key={p.id}
+                className="group card-dark rounded-xl overflow-hidden cursor-pointer"
+                onClick={() => setSelected(p)}>
+                {/* Image */}
+                <div className="relative overflow-hidden" style={{ background: '#0a0a0a', height: '200px' }}>
+                  <img src={p.image} alt={p.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                    style={{ objectFit: 'cover' }} />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    style={{ background: 'rgba(0,0,0,0.45)' }}>
+                    <span className="text-xs font-body uppercase tracking-widest px-4 py-2 rounded"
+                      style={{ border: '1px solid rgba(192,57,43,0.6)', color: '#c0392b', letterSpacing: '0.15em', background: 'rgba(0,0,0,0.5)' }}>
+                      Открыть
+                    </span>
+                  </div>
                   {p.badge && (
                     <span className="absolute top-2 left-2 px-2 py-0.5 text-white text-xs font-body font-semibold uppercase"
                       style={{ background: '#8b0000', letterSpacing: '0.06em' }}>{p.badge}</span>
                   )}
-                  <button className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
-                    style={{ background: 'rgba(10,10,10,0.75)', border: '1px solid rgba(139,0,0,0.35)' }}>
-                    <Icon name="Heart" size={12} style={{ color: '#c0392b' }} />
-                  </button>
+                  {!p.inStock && (
+                    <div className="absolute inset-0 flex items-end pb-2 justify-center"
+                      style={{ background: 'rgba(0,0,0,0.45)' }}>
+                      <span className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.4)' }}>Нет в наличии</span>
+                    </div>
+                  )}
                 </div>
+                {/* Info */}
                 <div className="p-4">
                   <p className="text-xs font-body uppercase tracking-wider mb-1"
                     style={{ color: 'rgba(192,192,192,0.35)', letterSpacing: '0.1em' }}>{p.material}</p>
@@ -201,10 +206,19 @@ export default function CatalogPage() {
                     <span className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.25)' }}>({p.reviews})</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="font-serif text-base font-semibold" style={{ color: '#e8e0d0' }}>{p.price.toLocaleString()} ₽</span>
-                    <button className="btn-blood px-3 py-1.5 text-xs font-body font-semibold uppercase"
+                    <div>
+                      <span className="font-serif text-base font-semibold" style={{ color: '#e8e0d0' }}>{p.price.toLocaleString()} ₽</span>
+                      {p.oldPrice && (
+                        <span className="block text-xs font-body line-through" style={{ color: 'rgba(235,235,235,0.22)' }}>
+                          {p.oldPrice.toLocaleString()} ₽
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      onClick={e => { e.stopPropagation(); setSelected(p); }}
+                      className="btn-blood px-3 py-1.5 text-xs font-body font-semibold uppercase"
                       style={{ letterSpacing: '0.06em' }}>
-                      <span>+ Корзина</span>
+                      <span>Подробнее</span>
                     </button>
                   </div>
                 </div>
@@ -214,8 +228,11 @@ export default function CatalogPage() {
         ) : (
           <div className="flex flex-col gap-3">
             {filtered.map(p => (
-              <div key={p.id} className="group card-dark rounded-xl flex gap-4 p-4">
-                <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+              <div key={p.id}
+                className="group card-dark rounded-xl flex gap-4 p-4 cursor-pointer"
+                onClick={() => setSelected(p)}>
+                <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0"
+                  style={{ background: '#0a0a0a' }}>
                   <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                   {p.badge && (
                     <span className="absolute top-1 left-1 px-1.5 py-0.5 text-white font-body font-semibold uppercase"
@@ -234,9 +251,11 @@ export default function CatalogPage() {
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <span className="font-serif text-lg font-semibold" style={{ color: '#e8e0d0' }}>{p.price.toLocaleString()} ₽</span>
-                    <button className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
+                    <button
+                      onClick={e => { e.stopPropagation(); setSelected(p); }}
+                      className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
                       style={{ letterSpacing: '0.06em' }}>
-                      <span>В корзину</span>
+                      <span>Подробнее</span>
                     </button>
                   </div>
                 </div>

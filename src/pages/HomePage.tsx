@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import Icon from '@/components/ui/icon';
+import { allProducts, type Product } from '@/data/products';
+import ProductModal from '@/components/ProductModal';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -13,52 +16,21 @@ const categories = [
   { icon: '🕯️', label: 'Декор', count: 52 },
 ];
 
-const featured = [
-  {
-    id: 1,
-    name: 'Кольцо "Череп Барона"',
-    price: '4 290 ₽',
-    oldPrice: '5 800 ₽',
-    rating: 4.9,
-    reviews: 87,
-    badge: 'Хит',
-    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/6c40d878-7ddd-4d56-a03f-72cc4f6ff142.jpg',
-    material: 'Серебро 925',
-  },
-  {
-    id: 2,
-    name: 'Колье "Кровавая Луна"',
-    price: '6 890 ₽',
-    oldPrice: '9 000 ₽',
-    rating: 4.8,
-    reviews: 64,
-    badge: 'Новинка',
-    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg',
-    material: 'Чёрное золото',
-  },
-  {
-    id: 3,
-    name: 'Серьги "Вороново крыло"',
-    price: '3 490 ₽',
-    oldPrice: '4 200 ₽',
-    rating: 4.7,
-    reviews: 41,
-    badge: '-20%',
-    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/33fcaa4a-af0e-4ce0-8667-b49a12f6c4c1.jpg',
-    material: 'Оксидированное серебро',
-  },
+const features = [
+  { icon: 'Shield',    title: 'Гарантия подлинности', desc: 'Только сертифицированные материалы' },
+  { icon: 'Truck',     title: 'Доставка по России',   desc: 'Бережная упаковка каждого заказа' },
+  { icon: 'RefreshCw', title: 'Возврат 30 дней',      desc: 'Без вопросов, если не понравится' },
+  { icon: 'Gem',       title: 'Ручная работа',        desc: 'Каждое украшение уникально' },
 ];
 
-const features = [
-  { icon: 'Shield', title: 'Гарантия подлинности', desc: 'Только сертифицированные материалы' },
-  { icon: 'Truck', title: 'Доставка по России', desc: 'Бережная упаковка каждого заказа' },
-  { icon: 'RefreshCw', title: 'Возврат 30 дней', desc: 'Без вопросов, если не понравится' },
-  { icon: 'Gem', title: 'Ручная работа', desc: 'Каждое украшение уникально' },
-];
+const featured = allProducts.filter(p => ['Хит', 'Новинка', '-20%'].includes(p.badge)).slice(0, 3);
 
 export default function HomePage({ onNavigate }: HomePageProps) {
+  const [selected, setSelected] = useState<Product | null>(null);
+
   return (
     <div className="min-h-screen dark-bg font-body">
+      {selected && <ProductModal product={selected} onClose={() => setSelected(null)} />}
 
       {/* HERO */}
       <section className="relative pt-16 overflow-hidden" style={{ minHeight: '100vh' }}>
@@ -72,7 +44,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center" style={{ minHeight: 'calc(100vh - 4rem)' }}>
 
-            {/* Text */}
             <div className="py-16">
               <p className="text-xs uppercase tracking-widest mb-4 animate-fade-up font-body"
                 style={{ color: '#c0392b', letterSpacing: '0.25em' }}>
@@ -82,8 +53,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', color: '#e8e0d0' }}>
                 Darkware
               </h1>
-              <p className="font-serif italic mb-6 animate-fade-up-1"
-                style={{ color: '#c0392b', fontSize: '1.25rem' }}>
+              <p className="font-serif italic mb-6 animate-fade-up-1" style={{ color: '#c0392b', fontSize: '1.25rem' }}>
                 "Носи тьму с гордостью"
               </p>
               <p className="text-sm leading-relaxed mb-10 animate-fade-up-2 max-w-md font-body"
@@ -114,7 +84,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </div>
             </div>
 
-            {/* Image */}
             <div className="relative flex justify-center items-center py-16">
               <div className="relative animate-float-slow">
                 <div className="absolute inset-0 rounded-2xl blur-2xl scale-95"
@@ -180,18 +149,31 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               Все товары <Icon name="ArrowRight" size={14} />
             </button>
           </div>
+
           <div className="grid md:grid-cols-3 gap-6">
             {featured.map(product => (
-              <div key={product.id} className="group card-dark rounded-2xl overflow-hidden">
-                <div className="relative h-56 overflow-hidden">
+              <div key={product.id}
+                className="group card-dark rounded-2xl overflow-hidden cursor-pointer"
+                onClick={() => setSelected(product)}>
+                <div className="relative overflow-hidden" style={{ background: '#0a0a0a', height: '220px' }}>
                   <img src={product.image} alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0"
+                  {/* hover overlay */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    style={{ background: 'rgba(0,0,0,0.45)' }}>
+                    <span className="text-xs font-body uppercase tracking-widest px-4 py-2"
+                      style={{ border: '1px solid rgba(192,57,43,0.6)', color: '#c0392b', letterSpacing: '0.15em', background: 'rgba(0,0,0,0.5)' }}>
+                      Открыть
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 pointer-events-none"
                     style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.85), transparent 55%)' }} />
-                  <span className="absolute top-3 left-3 px-2.5 py-1 text-xs font-body font-semibold uppercase tracking-wider text-white"
+                  <span className="absolute top-3 left-3 px-2.5 py-1 text-xs font-body font-semibold uppercase text-white"
                     style={{ background: '#8b0000', letterSpacing: '0.08em' }}>{product.badge}</span>
-                  <button className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200"
-                    style={{ background: 'rgba(10,10,10,0.75)', border: '1px solid rgba(139,0,0,0.35)' }}>
+                  <button
+                    className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200"
+                    style={{ background: 'rgba(10,10,10,0.75)', border: '1px solid rgba(139,0,0,0.35)' }}
+                    onClick={e => e.stopPropagation()}>
                     <Icon name="Heart" size={13} style={{ color: '#c0392b' }} />
                   </button>
                 </div>
@@ -205,12 +187,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-serif text-xl font-semibold" style={{ color: '#e8e0d0' }}>{product.price}</div>
-                      <div className="text-xs font-body line-through" style={{ color: 'rgba(235,235,235,0.25)' }}>{product.oldPrice}</div>
+                      <div className="font-serif text-xl font-semibold" style={{ color: '#e8e0d0' }}>{product.price.toLocaleString()} ₽</div>
+                      {product.oldPrice && (
+                        <div className="text-xs font-body line-through" style={{ color: 'rgba(235,235,235,0.25)' }}>
+                          {product.oldPrice.toLocaleString()} ₽
+                        </div>
+                      )}
                     </div>
-                    <button className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
-                      style={{ letterSpacing: '0.08em' }}>
-                      <span>В корзину</span>
+                    <button
+                      className="btn-blood px-4 py-2 text-xs font-body font-semibold uppercase"
+                      style={{ letterSpacing: '0.08em' }}
+                      onClick={e => { e.stopPropagation(); setSelected(product); }}>
+                      <span>Подробнее</span>
                     </button>
                   </div>
                 </div>
