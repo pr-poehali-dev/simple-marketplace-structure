@@ -130,7 +130,7 @@ export const allProducts: Product[] = [
     reviews: 29,
     badge: 'Люкс',
     material: 'Серебро + гранат',
-    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/6e147fce-08eb-43d5-b1ce-9006afc6b034.jpg',
+    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/5b8b0dc7-4016-4c92-abb2-664dffbc4d65.jpeg',
     description: 'Премиальное колье с каскадом гранатовых камней. Каждый камень огранён вручную. Поставляется в бархатной шкатулке.',
     details: ['Серебро 925°', 'Гранат натуральный 7 шт.', 'Длина: 42 см', 'Вес: 21г', 'Бархатная шкатулка в подарок'],
     inStock: false,
