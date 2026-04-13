@@ -4,7 +4,7 @@ import { allProducts, type Product } from '@/data/products';
 import ProductModal from '@/components/ProductModal';
 import { useCart } from '@/context/CartContext';
 
-const categories = ['Все', 'Кольца', 'Ожерелья', 'Серьги', 'Браслеты', 'Броши', 'Декор'];
+const categories = ['Все', 'Кольца', 'Чокеры', 'Серьги', 'Браслеты', 'Броши', 'Декор'];
 const sortOptions = [
   { value: 'popular',    label: 'По популярности' },
   { value: 'price-asc',  label: 'Сначала дешевле' },

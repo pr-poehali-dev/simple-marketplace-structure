@@ -10,7 +10,7 @@ interface HomePageProps {
 
 const categories = [
   { icon: '💀', label: 'Кольца', count: 214 },
-  { icon: '🖤', label: 'Ожерелья', count: 187 },
+  { icon: '🖤', label: 'Чокеры', count: 187 },
   { icon: '🩸', label: 'Серьги', count: 143 },
   { icon: '⛓️', label: 'Браслеты', count: 98 },
   { icon: '🦇', label: 'Броши', count: 67 },
