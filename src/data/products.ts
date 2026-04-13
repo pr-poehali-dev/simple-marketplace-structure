@@ -185,7 +185,7 @@ export const allProducts: Product[] = [
     reviews: 44,
     badge: 'Хит',
     material: 'Чернёное серебро',
-    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/5c537f04-432f-4788-a6fb-ced3b0eaf191.jpeg',
+    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/1ca9e670-18ff-46f5-9202-a780e02d2104.jpg',
     description: 'Массивный браслет-цепь из соединённых между собой черепов с орнаментом и кристальными вставками. Некоторые черепа украшены прозрачными квадратными кристаллами в высокой оправе. Тяжёлый, увесистый — настоящее заявление на руке.',
     details: ['Серебро 925° чернёное', 'Длина: 18–22 см', 'Вес: 35г', 'Разделители-черепа 5 шт.'],
     inStock: true,
