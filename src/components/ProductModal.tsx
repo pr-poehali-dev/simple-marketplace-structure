@@ -22,6 +22,11 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   const { add, items } = useCart();
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<'info' | 'reviews'>('info');
+  const [reviewAuthor, setReviewAuthor] = useState('');
+  const [reviewText, setReviewText] = useState('');
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewSent, setReviewSent] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
   const inCart = items.some(i => i.product.id === product.id);
 
@@ -163,6 +168,73 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                           style={{ color: 'rgba(235,235,235,0.5)', lineHeight: '1.65' }}>{r.text}</p>
                       </div>
                     ))
+                  )}
+
+                  {/* Форма отзыва */}
+                  {!showReviewForm && !reviewSent && (
+                    <button onClick={() => setShowReviewForm(true)}
+                      className="w-full py-2.5 text-xs font-body uppercase tracking-widest transition-all rounded-lg mt-1"
+                      style={{ border: '1px dashed rgba(139,0,0,0.35)', color: 'rgba(192,57,43,0.7)', letterSpacing: '0.12em' }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(139,0,0,0.6)'; e.currentTarget.style.color = '#c0392b'; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(139,0,0,0.35)'; e.currentTarget.style.color = 'rgba(192,57,43,0.7)'; }}>
+                      + Оставить отзыв
+                    </button>
+                  )}
+
+                  {reviewSent && (
+                    <div className="p-3 rounded-xl text-center" style={{ background: 'rgba(139,0,0,0.1)', border: '1px solid rgba(139,0,0,0.3)' }}>
+                      <p className="font-body text-xs" style={{ color: '#c0392b' }}>Спасибо! Ваш отзыв отправлен на модерацию.</p>
+                    </div>
+                  )}
+
+                  {showReviewForm && !reviewSent && (
+                    <div className="p-4 rounded-xl space-y-3 mt-1" style={{ background: 'rgba(139,0,0,0.07)', border: '1px solid rgba(139,0,0,0.25)' }}>
+                      <p className="text-xs uppercase tracking-widest font-body" style={{ color: 'rgba(235,235,235,0.35)', letterSpacing: '0.15em' }}>Ваш отзыв</p>
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1">
+                        {[1,2,3,4,5].map(s => (
+                          <button key={s} onClick={() => setReviewRating(s)}>
+                            <span style={{ fontSize: 20, color: s <= reviewRating ? '#8b0000' : 'rgba(139,0,0,0.2)', cursor: 'pointer' }}>★</span>
+                          </button>
+                        ))}
+                        <span className="text-xs font-body ml-1" style={{ color: 'rgba(235,235,235,0.35)' }}>{reviewRating} из 5</span>
+                      </div>
+
+                      <input
+                        placeholder="Ваше имя *"
+                        value={reviewAuthor}
+                        onChange={e => setReviewAuthor(e.target.value)}
+                        className="w-full text-xs font-body rounded-lg px-3 py-2.5 outline-none"
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#ebebeb' }}
+                      />
+                      <textarea
+                        placeholder="Расскажите о вашем опыте *"
+                        value={reviewText}
+                        onChange={e => setReviewText(e.target.value)}
+                        rows={3}
+                        className="w-full text-xs font-body rounded-lg px-3 py-2.5 outline-none resize-none"
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#ebebeb' }}
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            if (reviewAuthor.trim() && reviewText.trim()) {
+                              setReviewSent(true);
+                              setShowReviewForm(false);
+                            }
+                          }}
+                          className="flex-1 py-2 text-xs font-body uppercase tracking-widest rounded"
+                          style={{ background: '#8b0000', color: '#fff', letterSpacing: '0.1em' }}>
+                          Отправить
+                        </button>
+                        <button onClick={() => setShowReviewForm(false)}
+                          className="px-4 py-2 text-xs font-body uppercase tracking-widest rounded"
+                          style={{ border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(235,235,235,0.4)', letterSpacing: '0.1em' }}>
+                          Отмена
+                        </button>
+                      </div>
+                    </div>
                   )}
                 </div>
               )}

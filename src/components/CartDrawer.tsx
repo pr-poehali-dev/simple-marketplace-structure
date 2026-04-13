@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { useCart } from '@/context/CartContext';
+import CheckoutModal from '@/components/CheckoutModal';
 
 interface CartDrawerProps {
   onClose: () => void;
@@ -8,6 +9,7 @@ interface CartDrawerProps {
 
 export default function CartDrawer({ onClose }: CartDrawerProps) {
   const { items, remove, setQty, total, clear } = useCart();
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -20,7 +22,9 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
+    <>
+    {checkoutOpen && <CheckoutModal onClose={() => setCheckoutOpen(false)} />}
+    <div className="fixed inset-0 z-40 flex justify-end" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
       {/* Backdrop */}
       <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }} onClick={onClose} />
 
@@ -103,7 +107,8 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
               <span className="text-xs font-body uppercase tracking-widest" style={{ color: 'rgba(235,235,235,0.4)', letterSpacing: '0.15em' }}>Итого</span>
               <span className="font-serif text-2xl font-semibold" style={{ color: '#e8e0d0' }}>{total.toLocaleString()} ₽</span>
             </div>
-            <button className="w-full btn-blood py-4 text-sm font-body font-semibold uppercase blood-glow-sm mb-3"
+            <button onClick={() => setCheckoutOpen(true)}
+              className="w-full btn-blood py-4 text-sm font-body font-semibold uppercase blood-glow-sm mb-3"
               style={{ letterSpacing: '0.12em' }}>
               <span className="flex items-center justify-center gap-2">
                 <Icon name="CreditCard" size={15} /> Оформить заказ
@@ -120,5 +125,6 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
         )}
       </div>
     </div>
+    </>
   );
 }
