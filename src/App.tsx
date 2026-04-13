@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import ContactsPage from './pages/ContactsPage';
 import ProfilePage from './pages/ProfilePage';
+import DeliveryPage from './pages/DeliveryPage';
+import ReturnsPage from './pages/ReturnsPage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -19,6 +21,8 @@ export default function App() {
       case 'catalog':  return <CatalogPage />;
       case 'contacts': return <ContactsPage />;
       case 'profile':  return <ProfilePage onNavigate={setCurrentPage} />;
+      case 'delivery': return <DeliveryPage onNavigate={setCurrentPage} />;
+      case 'returns':  return <ReturnsPage onNavigate={setCurrentPage} />;
       default:         return <HomePage onNavigate={setCurrentPage} />;
     }
   };

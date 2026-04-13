@@ -271,8 +271,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
           <p className="text-xs font-body uppercase tracking-wider"
             style={{ color: 'rgba(235,235,235,0.2)', letterSpacing: '0.12em' }}>© 2024 Darkware. Все права защищены.</p>
-          <div className="flex gap-5">
-            {[['Каталог', 'catalog'], ['Контакты', 'contacts']].map(([lbl, id]) => (
+          <div className="flex flex-wrap justify-center gap-5">
+            {[['Каталог', 'catalog'], ['Контакты', 'contacts'], ['Доставка', 'delivery'], ['Возврат', 'returns']].map(([lbl, id]) => (
               <button key={id} onClick={() => onNavigate(id)}
                 className="text-xs font-body uppercase tracking-wider transition-colors"
                 style={{ color: 'rgba(235,235,235,0.25)', letterSpacing: '0.12em' }}
