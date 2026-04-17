@@ -34,7 +34,7 @@ export const allProducts: Product[] = [
     reviews: 87,
     badge: 'Хит',
     material: 'Серебро 925',
-    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/e209151f-1a9f-4d8c-bc73-fcfff1aa99d6.jpg',
+    image: 'https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/6f29470b-04ca-4428-9f99-f069cfc96cd0.jpg',
     description: 'Перстень с объёмным черепом ворона — пустые глазницы, острый изогнутый клюв, рельефное оперение на темени. Серебро состарено вручную, тёмные впадины подчёркивают каждую деталь. Массивная широкая шинка сидит уверенно и смотрится брутально.',
     details: ['Серебро 925°', 'Вес: 18г', 'Размеры: 16–22', 'Ручная отливка', 'Гравировка бесплатно'],
     inStock: true,
