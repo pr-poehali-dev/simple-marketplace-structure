@@ -91,7 +91,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="absolute inset-0 rounded-2xl blur-2xl scale-95"
                   style={{ background: 'radial-gradient(circle, rgba(139,0,0,0.35), transparent)' }} />
                 <img
-                  src="https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/files/c9a23429-b15e-48ae-9cb6-b48aefba63fa.jpg"
+                  src="https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/b1a8b7bd-fd94-4ec3-b1d7-ce816dc45b8a.jpg"
                   alt="Darkware"
                   className="relative rounded-2xl w-full max-w-md"
                   style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.8), 0 0 40px rgba(139,0,0,0.25)', border: '1px solid rgba(139,0,0,0.25)' }}
@@ -99,8 +99,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="absolute -bottom-5 -left-6 px-5 py-3 rounded-xl"
                   style={{ background: '#141414', border: '1px solid rgba(139,0,0,0.35)', boxShadow: '0 12px 32px rgba(0,0,0,0.6)' }}>
                   <div className="text-xs uppercase tracking-widest mb-0.5 font-body"
-                    style={{ color: 'rgba(235,235,235,0.3)', letterSpacing: '0.15em' }}>Материал</div>
-                  <div className="font-serif text-base font-semibold" style={{ color: '#c0c0c0' }}>Серебро 925°</div>
+                    style={{ color: 'rgba(235,235,235,0.3)', letterSpacing: '0.15em' }}>Перстень</div>
+                  <div className="font-serif text-base font-semibold" style={{ color: '#c0c0c0' }}>Череп с орнаментом</div>
+                </div>
+                <div className="absolute -top-4 -right-4 px-4 py-2 rounded-xl"
+                  style={{ background: '#8b0000', boxShadow: '0 8px 24px rgba(139,0,0,0.5)' }}>
+                  <div className="text-xs font-body font-bold uppercase" style={{ color: '#e8e0d0', letterSpacing: '0.1em' }}>Серебро 925°</div>
                 </div>
               </div>
             </div>
@@ -112,6 +116,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       <div className="blood-divider max-w-4xl mx-auto" />
+
+      {/* MARQUEE STRIP */}
+      <div className="py-4 overflow-hidden" style={{ borderTop: '1px solid rgba(139,0,0,0.2)', borderBottom: '1px solid rgba(139,0,0,0.2)', background: 'rgba(139,0,0,0.05)' }}>
+        <div className="flex animate-marquee whitespace-nowrap">
+          {Array(3).fill(['✦ Ручная работа', '☩ Серебро 925°', '🦇 Готика', '✦ Авторские украшения', '☩ Тёмная романтика', '💀 Ограниченные тиражи']).flat().map((item, i) => (
+            <span key={i} className="mx-8 text-xs font-body uppercase tracking-widest" style={{ color: 'rgba(192,57,43,0.7)', letterSpacing: '0.2em' }}>{item}</span>
+          ))}
+        </div>
+      </div>
 
       {/* CATEGORIES */}
       <section className="py-20 px-4">
@@ -130,6 +143,49 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="text-xs font-body" style={{ color: 'rgba(192,57,43,0.75)' }}>{cat.count} шт.</div>
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PHILOSOPHY */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            <div className="relative rounded-2xl overflow-hidden" style={{ minHeight: '420px' }}>
+              <img
+                src="https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/b1a8b7bd-fd94-4ec3-b1d7-ce816dc45b8a.jpg"
+                alt="Мастерство"
+                className="w-full h-full object-cover"
+                style={{ position: 'absolute', inset: 0 }}
+              />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(139,0,0,0.25) 100%)' }} />
+              <div className="relative z-10 p-10 flex flex-col justify-end h-full" style={{ minHeight: '420px' }}>
+                <p className="text-xs uppercase tracking-widest mb-3 font-body" style={{ color: '#c0392b', letterSpacing: '0.2em' }}>✦ наш подход</p>
+                <h3 className="font-gothic text-3xl lg:text-4xl mb-4" style={{ color: '#e8e0d0' }}>Мастерство<br/>в каждой детали</h3>
+                <p className="text-sm font-body" style={{ color: 'rgba(235,235,235,0.6)', lineHeight: '1.8', maxWidth: '340px' }}>
+                  Каждое украшение рождается вручную — от эскиза до полировки. Никаких компромиссов с качеством.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {[
+                { num: '01', title: 'Тёмная эстетика', text: 'Черепа, оккультные символы, готические орнаменты — не просто декор, а язык для тех, кто думает иначе.' },
+                { num: '02', title: 'Натуральные камни', text: 'Гранат, обсидиан, оникс, лунный камень. Только подлинные минералы с уникальным характером.' },
+                { num: '03', title: 'Серебро с историей', text: 'Состаривание вручную, патинирование, чернение — каждая вещь выглядит как найденный артефакт.' },
+              ].map(item => (
+                <div key={item.num} className="group flex gap-6 p-6 rounded-xl transition-all duration-300"
+                  style={{ background: '#141414', border: '1px solid rgba(139,0,0,0.18)' }}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(139,0,0,0.5)')}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(139,0,0,0.18)')}>
+                  <div className="font-gothic text-3xl flex-shrink-0" style={{ color: 'rgba(139,0,0,0.3)' }}>{item.num}</div>
+                  <div>
+                    <h4 className="font-serif text-base font-semibold mb-2" style={{ color: '#e8e0d0' }}>{item.title}</h4>
+                    <p className="text-xs font-body" style={{ color: 'rgba(235,235,235,0.4)', lineHeight: '1.7' }}>{item.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
