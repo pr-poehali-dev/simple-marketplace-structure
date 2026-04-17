@@ -35,83 +35,67 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       {selected && <ProductModal product={selected} onClose={() => setSelected(null)} />}
 
       {/* HERO */}
-      <section className="relative pt-16 overflow-hidden" style={{ minHeight: '100vh' }}>
+      <section className="relative overflow-hidden" style={{ minHeight: '100vh' }}>
+        {/* Фон — готическая пара */}
+        <img
+          src="https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/65baefdc-d74c-49ba-aeac-5be62e438f2b.jpg"
+          alt="Darkware"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ filter: 'grayscale(100%) brightness(0.45)' }}
+        />
+        {/* Затемнение слоями */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.2) 100%)' }} />
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, transparent 40%)' }} />
+        {/* Красный акцент */}
         <div className="absolute top-0 left-0 right-0 h-px"
           style={{ background: 'linear-gradient(90deg, transparent 0%, #8b0000 30%, #c0392b 50%, #8b0000 70%, transparent 100%)' }} />
-        <div className="absolute top-32 left-16 w-64 h-64 rounded-full blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(139,0,0,0.18), transparent)' }} />
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(100,0,0,0.12), transparent)' }} />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center" style={{ minHeight: 'calc(100vh - 4rem)' }}>
-
-            <div className="py-16">
-              <p className="text-xs uppercase tracking-widest mb-4 animate-fade-up font-body"
-                style={{ color: '#c0392b', letterSpacing: '0.25em' }}>
-                ✦ Готические украшения и аксессуары ✦
-              </p>
-              <h1 className="font-gothic mb-4 animate-fade-up-1 leading-none"
-                style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', color: '#e8e0d0' }}>
-                Darkware
-              </h1>
-              <p className="font-serif italic mb-6 animate-fade-up-1" style={{ color: '#c0392b', fontSize: '1.25rem' }}>
-                "Носи тьму с гордостью"
-              </p>
-              <p className="text-sm leading-relaxed mb-10 animate-fade-up-2 max-w-md font-body"
-                style={{ color: 'rgba(235,235,235,0.5)', lineHeight: '1.8' }}>
-                Авторские украшения в стиле тёмной романтики. Серебро, обсидиан, гранат.
-                Каждая вещь — произведение мрачного искусства.
-              </p>
-              <div className="flex flex-wrap gap-4 animate-fade-up-3">
-                <button onClick={() => onNavigate('catalog')}
-                  className="btn-blood px-8 py-3.5 text-xs font-body font-semibold uppercase blood-glow-sm"
-                  style={{ letterSpacing: '0.14em' }}>
-                  <span>Каталог украшений</span>
-                </button>
-                <button onClick={() => onNavigate('contacts')}
-                  className="btn-outline-blood px-8 py-3.5 text-xs font-body font-semibold uppercase"
-                  style={{ letterSpacing: '0.14em' }}>
-                  Связаться
-                </button>
-              </div>
-              <div className="flex gap-10 mt-12 animate-fade-up-3">
-                {[['760+', 'украшений'], ['4.9★', 'рейтинг'], ['12 лет', 'опыта']].map(([val, lbl]) => (
-                  <div key={lbl}>
-                    <div className="font-serif text-2xl font-semibold" style={{ color: '#e8e0d0' }}>{val}</div>
-                    <div className="text-xs uppercase tracking-widest mt-0.5 font-body"
-                      style={{ color: 'rgba(235,235,235,0.3)', letterSpacing: '0.15em' }}>{lbl}</div>
-                  </div>
-                ))}
-              </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center" style={{ minHeight: '100vh', paddingTop: '5rem', paddingBottom: '6rem' }}>
+          <div className="max-w-2xl">
+            <p className="text-xs uppercase tracking-widest mb-5 animate-fade-up font-body"
+              style={{ color: '#c0392b', letterSpacing: '0.28em' }}>
+              ✦ Готические украшения и аксессуары ✦
+            </p>
+            <h1 className="font-gothic mb-5 animate-fade-up-1 leading-none"
+              style={{ fontSize: 'clamp(3.5rem, 9vw, 7rem)', color: '#e8e0d0', textShadow: '0 4px 40px rgba(0,0,0,0.8)' }}>
+              Darkware
+            </h1>
+            <p className="font-serif italic mb-6 animate-fade-up-1" style={{ color: '#c0392b', fontSize: '1.35rem' }}>
+              "Носи тьму с гордостью"
+            </p>
+            <p className="text-sm leading-relaxed mb-10 animate-fade-up-2 font-body"
+              style={{ color: 'rgba(235,235,235,0.6)', lineHeight: '1.9', maxWidth: '480px' }}>
+              Авторские украшения в стиле тёмной романтики — для тех, кто чувствует красоту в ночи.
+              Серебро 925°, натуральные камни, ручная работа.
+            </p>
+            <div className="flex flex-wrap gap-4 animate-fade-up-3">
+              <button onClick={() => onNavigate('catalog')}
+                className="btn-blood px-10 py-4 text-xs font-body font-semibold uppercase blood-glow-sm"
+                style={{ letterSpacing: '0.16em' }}>
+                <span>Каталог украшений</span>
+              </button>
+              <button onClick={() => onNavigate('contacts')}
+                className="btn-outline-blood px-10 py-4 text-xs font-body font-semibold uppercase"
+                style={{ letterSpacing: '0.16em', backdropFilter: 'blur(8px)', background: 'rgba(0,0,0,0.3)' }}>
+                Связаться
+              </button>
             </div>
 
-            <div className="relative flex justify-center items-center py-16">
-              <div className="relative animate-float-slow">
-                <div className="absolute inset-0 rounded-2xl blur-2xl scale-95"
-                  style={{ background: 'radial-gradient(circle, rgba(139,0,0,0.35), transparent)' }} />
-                <img
-                  src="https://cdn.poehali.dev/projects/f68a84c0-111e-450c-bda7-29b9960e5c2f/bucket/b1a8b7bd-fd94-4ec3-b1d7-ce816dc45b8a.jpg"
-                  alt="Darkware"
-                  className="relative rounded-2xl w-full max-w-md"
-                  style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.8), 0 0 40px rgba(139,0,0,0.25)', border: '1px solid rgba(139,0,0,0.25)' }}
-                />
-                <div className="absolute -bottom-5 -left-6 px-5 py-3 rounded-xl"
-                  style={{ background: '#141414', border: '1px solid rgba(139,0,0,0.35)', boxShadow: '0 12px 32px rgba(0,0,0,0.6)' }}>
-                  <div className="text-xs uppercase tracking-widest mb-0.5 font-body"
-                    style={{ color: 'rgba(235,235,235,0.3)', letterSpacing: '0.15em' }}>Перстень</div>
-                  <div className="font-serif text-base font-semibold" style={{ color: '#c0c0c0' }}>Череп с орнаментом</div>
+            <div className="flex gap-12 mt-14 animate-fade-up-3">
+              {[['760+', 'украшений'], ['4.9★', 'рейтинг'], ['12 лет', 'опыта']].map(([val, lbl]) => (
+                <div key={lbl}>
+                  <div className="font-serif text-3xl font-semibold" style={{ color: '#e8e0d0', textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}>{val}</div>
+                  <div className="text-xs uppercase tracking-widest mt-1 font-body"
+                    style={{ color: 'rgba(235,235,235,0.35)', letterSpacing: '0.18em' }}>{lbl}</div>
                 </div>
-                <div className="absolute -top-4 -right-4 px-4 py-2 rounded-xl"
-                  style={{ background: '#8b0000', boxShadow: '0 8px 24px rgba(139,0,0,0.5)' }}>
-                  <div className="text-xs font-body font-bold uppercase" style={{ color: '#e8e0d0', letterSpacing: '0.1em' }}>Серебро 925°</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
           style={{ background: 'linear-gradient(to top, var(--obsidian), transparent)' }} />
       </section>
 
